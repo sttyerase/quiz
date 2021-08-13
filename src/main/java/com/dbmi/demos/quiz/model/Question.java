@@ -14,7 +14,7 @@ import java.util.Vector;
 public class Question
 {
    /** The text of the question */
-   private String questionText;
+   private String questionText = "";
    /** A list of possible choices. */
    private Vector<String> choiceList = new Vector<>(100);
    /** The index of the correct answer*/
@@ -22,15 +22,9 @@ public class Question
    /** The explanation of the correct answer */
    private String explanation = null;
    /** Is this question answered? */
-   private boolean answered;
+   private boolean answered = false;
    /** Was it answered correctly? */
    private boolean answeredCorrectly = false;
-
-   public Question(){
-      super();
-      this.answered = false;
-      questionText = "";
-   }
 
    /**
     *  @return a string with the text of the question.
@@ -80,34 +74,34 @@ public class Question
 
    public void insertChoiceElementAt(String aChoice,int i){
       choiceList.insertElementAt(aChoice,i);
-   }
+   } // INSERTCHOICEELEMENTAT(STRING,INT)
 
    public void setQuestionText(String text){
       this.questionText = text;
-   }
+   } // SETQUESTIONTEXT(STRING)
 
    public void setAnswered(boolean torf){
       answered = torf;
-   }
+   } // SETANSWERED(BOOLEAN)
 
    public void setAnsweredCorrectly(boolean yesno){
       answeredCorrectly = yesno;
-   }
+   } // SETANSWEREDCORRECTLY(BOOLEAN)
 
    public void setExplanation(String expl){
       explanation = expl;
-   }
+   } // SETEXPLANATION(STRING)
 
    public void setCorrectAnswerNumber(int aNum){
       this.theAnswer = aNum;
-   }
+   } // SETCORRECTANSWERNUMBER
 
    public void trimChoiceToSize(){
       choiceList.trimToSize();
-   }
+   } // TRIMCHOICETOSIZE
 
    public java.util.Enumeration<String> choiceElements(){
       return choiceList.elements();
-   }
+   } // CHOICEELEMENTS()
 
-}
+} // CLASS

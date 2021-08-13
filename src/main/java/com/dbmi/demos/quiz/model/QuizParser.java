@@ -13,7 +13,7 @@ public class QuizParser extends XMLFilterImpl
    private int indx = 0;
 
    /** constructs a QuizParser, passing the Quiz and QuestionList handles.*/
-   QuizParser(Quiz aQuiz,QuestionList qList){
+   public QuizParser(Quiz aQuiz, QuestionList qList){
       super();
       this.setThisQuiz(aQuiz);
       this.qList = qList;

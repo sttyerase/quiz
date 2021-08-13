@@ -35,7 +35,7 @@ public class QuestionList {
 
    public boolean notDone(){
       return this.currentQuestionNumber < theQuestions.size();
-   }
+   } // NOTDONE()
    
    public void initQuestionList(){
       Question aQ;
@@ -44,8 +44,8 @@ public class QuestionList {
          aQ = e.nextElement();
          aQ.setAnswered(false);
          aQ.setAnsweredCorrectly(false);
-      }
+      } // WHILE
          
-   }
+   } // INITQUESTIONLIST()
    
 } // CLASS
