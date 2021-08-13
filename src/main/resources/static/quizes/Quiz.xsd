@@ -1,0 +1,9 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:annotation>
+    <xsd:documentation xml:lang="en">
+      Schema definition for a Serviceprobe configuration file
+      Copyright 2021 D.B. Moore. All rights reserved.
+    </xsd:documentation>
+  </xsd:annotation>
+
+</xsd:schema>

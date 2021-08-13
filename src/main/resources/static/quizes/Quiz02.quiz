@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<quiz name="Basic Chemistry Quiz" schemaLocation="Quiz.xsd">
+   <question number="1">
+      <questionText>
+      Which of the following is not a heavy metal?
+      </questionText>
+      <choiceList type="CHECKBOX" validAnswer="3">
+         <choice>
+            Vanadium
+         </choice>
+         <choice>
+            Selenium
+         </choice>
+         <choice>
+            Lithium
+         </choice>
+         <choice>
+            Chromium
+         </choice>
+         <choice>
+            Gallium
+         </choice>
+      </choiceList>
+      <explanation>
+         Lithium is not a heavy metal, but one of the alkalai metals including sodium, potassium, rubidium, caesium and francium.
+      </explanation>
+   </question>
+</quiz>
