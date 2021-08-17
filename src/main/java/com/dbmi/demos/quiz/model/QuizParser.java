@@ -4,8 +4,7 @@ import org.xml.sax.*;
 import org.xml.sax.helpers.XMLFilterImpl;
 
 @SuppressWarnings("unused")
-public class QuizParser extends XMLFilterImpl
-{
+public class QuizParser extends XMLFilterImpl{
    private Quiz thisQuiz;
    private Question thisQ;
    private final QuestionList qList;
@@ -13,10 +12,9 @@ public class QuizParser extends XMLFilterImpl
    private int indx = 0;
 
    /** constructs a QuizParser, passing the Quiz and QuestionList handles.*/
-   public QuizParser(Quiz aQuiz, QuestionList qList){
-      super();
+   public QuizParser(Quiz aQuiz){
       this.setThisQuiz(aQuiz);
-      this.qList = qList;
+      this.qList = aQuiz.getQuestionList();
    } // CONSTRUCTOR
 
    /** Implements logic executed when a start of element is detected.
