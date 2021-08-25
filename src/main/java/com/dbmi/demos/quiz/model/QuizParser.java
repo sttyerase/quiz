@@ -1,103 +1,33 @@
 package com.dbmi.demos.quiz.model;
 
-import org.xml.sax.*;
-import org.xml.sax.helpers.XMLFilterImpl;
+import org.xml.sax.SAXException;
 
-@SuppressWarnings("unused")
-public class QuizParser extends XMLFilterImpl{
-   private Quiz thisQuiz;
-   private Question thisQ;
-   private final QuestionList qList;
-   private String charactersTempString = "";
-   private int indx = 0;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+import java.io.File;
+import java.io.IOException;
 
-   /** constructs a QuizParser, passing the Quiz and QuestionList handles.*/
-   public QuizParser(Quiz aQuiz){
-      this.setThisQuiz(aQuiz);
-      this.qList = aQuiz.getQuestionList();
-   } // CONSTRUCTOR
+public class QuizParser {
 
-   /** Implements logic executed when a start of element is detected.
-    *  Overrides startElement() in HandlerBase which does nothing.
-    *  //@exception org.xml.sax.SaxException
-    */
-   public void startElement(String uri,String localName,String qName, Attributes attrs){
-      switch(localName){
-         case "question":
-            thisQ  = new Question();
-            break;
-         case "questionText":
-            charactersTempString = "";
-            break;
-         case "choiceList":
-            setIndx(0);
-            int va = Integer.parseInt(attrs.getValue("validAnswer"));
-            thisQ.setCorrectAnswerNumber(va-1);
-         case "choice":
-         case "explanation":
-         case "quiz":
-            break;
-      } // SWITCH
-   } // STARTELEMENT()
+    private Quiz theQuiz = null;
 
-   /** Return a String of parsed characters
-    * //@exception org.xml.sax.SAXException
-    */
-   public void characters(char[] ch, int start, int length){
-      charactersTempString = new String(ch,start,length);
-   } // CHARACTERS()
+    public QuizParser(Quiz aQuiz) {
+        this.theQuiz = aQuiz;
+    } // CONSTRUCTOR(QUIZ)
 
-   /** Implements logic executed when and end of element is detected.
-    *  Overrides endElement() in HandlerBase which does nothing.
-    *  //@exception org.xml.sax.SaxException
-    */
-   public void endElement(String name){
-      switch (name){
-         case "question":
-            qList.getTheQuestions().addElement(thisQ);
-            break;
-         case "questionText":
-            thisQ.setQuestionText(charactersTempString.replace('\n', ' '));
-         case "choiceList":
-            thisQ.trimChoiceToSize();
-            break;
-         case "choice":
-            setIndx(getIndx() + 1);
-            thisQ.addChoiceElement(charactersTempString.replace('\n', ' '));
-            break;
-         case "explanation":
-            thisQ.setExplanation(charactersTempString.replace('\n', ' '));
-            break;
-         case "quiz":
-            break;
-         default:
-            System.out.println("No match for: " + name);
-      } // SWITCH
-   } // ENDELEMENT()
-
-   /** Implements logic executed when an end of document is detected.
-    *  Overrides endElement() in HandlerBase which does nothing.
-    *  Trim the Question List to its exact number of elements
-    * //@exception org.xml.sax.SAXException
-    */
-   public void endDocument(){
-      qList.getTheQuestions().trimToSize();
-   } // ENDDOCUMENT()
-
-   public Quiz getThisQuiz() {
-      return thisQuiz;
-   } // GETTHISQUIZ()
-
-   public void setThisQuiz(Quiz thisQuiz) {
-      this.thisQuiz = thisQuiz;
-   } // SETTHISQUIZ(QUIZ)
-
-   public int getIndx() {
-      return indx;
-   } // GETINDX()
-
-   public void setIndx(int indx) {
-      this.indx = indx;
-   } // SETINDX(INT)
-
+    public void parse(String aURI) throws QuizException {
+        try {
+            SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
+            saxParserFactory.setNamespaceAware(true);
+            SAXParser myParser = saxParserFactory.newSAXParser();
+            myParser.parse(new File(aURI),new QuizParseHandler(theQuiz));
+        } catch (ParserConfigurationException pce) {
+            throw new QuizException("encountered configuration exception while creating parser: " + pce);
+        } catch (SAXException se) {
+            throw new QuizException("encountered SAXException while creating parser: " + se);
+        } catch (IOException ioe) {
+            throw new QuizException("IO exception while creating parser: " + ioe);
+        } // TRY-CATCH
+    } // PARSECONFIG(PROBE)
 } // CLASS
