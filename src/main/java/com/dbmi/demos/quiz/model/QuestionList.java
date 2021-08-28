@@ -47,5 +47,9 @@ public class QuestionList {
       } // WHILE
          
    } // INITQUESTIONLIST()
-   
+
+   public int getNumberOfQuestions(){
+      return theQuestions.size();
+   } // GETNUMBEROFQUESTIONS()
+
 } // CLASS

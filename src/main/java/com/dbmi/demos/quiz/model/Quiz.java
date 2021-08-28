@@ -16,7 +16,7 @@ public class Quiz{
    public Quiz(String aQuizDoc){
       myQuestionList = new QuestionList(200);
       this.theDocument = aQuizDoc;
-      myLogger = Logger.getLogger("quizapplication.log");
+      myLogger = Logger.getLogger("Quiz.log");
    } // CONSTRUCTOR(STRING)
 
    /** This method calls the XML parser and builds Question
@@ -30,6 +30,7 @@ public class Quiz{
       }catch(QuizException qe) {
          throw new QuizException("Caught parsing error: " + qe);
       } // TRY-CATCH
+      myLogger.info("QUIZ vitals:          " + myQuestionList.getNumberOfQuestions());
    } // FILLQUESTIONLIST()
 
    public QuestionList getQuestionList() {

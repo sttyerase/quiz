@@ -33,6 +33,7 @@ public class QuizParseHandler extends DefaultHandler {
             setIndx(0);
             int va = Integer.parseInt(attrs.getValue("validAnswer"));
             thisQ.setCorrectAnswerNumber(va-1);
+            break;
          case "choice":
          case "explanation":
          case "quiz":
@@ -51,8 +52,8 @@ public class QuizParseHandler extends DefaultHandler {
     *  Overrides endElement() in HandlerBase which does nothing.
     *  //@exception org.xml.sax.SaxException
     */
-   public void endElement(String name){
-      switch (name){
+   public void endElement(String uri,String localName,String qName){
+      switch (localName){
          case "question":
             qList.getTheQuestions().addElement(thisQ);
             break;
@@ -71,7 +72,7 @@ public class QuizParseHandler extends DefaultHandler {
          case "quiz":
             break;
          default:
-            System.out.println("No match for: " + name);
+            System.out.println("No match for: " + localName);
       } // SWITCH
    } // ENDELEMENT()
 

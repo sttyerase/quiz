@@ -17,6 +17,7 @@ public class QuizController {
     @GetMapping("/welcome")
     public ResponseEntity<String> welcome(){
         HttpHeaders headers = new HttpHeaders();
+        myLogger.fine("welcome page displayed");
         return new ResponseEntity<String>("Welcome to the Quiz.",headers, HttpStatus.OK);
     } // WELCOME()
 

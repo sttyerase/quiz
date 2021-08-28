@@ -11,6 +11,8 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Vector;
 import java.util.logging.Logger;
 
 @Component
@@ -22,6 +24,7 @@ public class QuizApplicationRunner implements ApplicationRunner {
     private String quizpath;
 
     private final ResourceLoader myResourceLoader = new DefaultResourceLoader(this.getClass().getClassLoader());
+    private Vector<Quiz> theQuizes = new Vector<>(200);
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -34,8 +37,11 @@ public class QuizApplicationRunner implements ApplicationRunner {
         myLogger.info("QUIZAPPLICATIONRUNNER: quiz directory location:    " + quizdir);
         String[] quizfiles = quizdir.list((d, s) -> s.toLowerCase().endsWith(".quiz"));
         myLogger.info("QUIZAPPLICATIONRUNNER: number of quiz files:       " + quizfiles.length);
-        Quiz myNewQuiz = new Quiz(quizdir + "/" + quizfiles[0]);
-        myNewQuiz.fillQuestionList();
+        for(String indx : quizfiles){
+            Quiz myNewQuiz = new Quiz(quizdir + "/" + indx);
+            myNewQuiz.fillQuestionList();
+            theQuizes.add(myNewQuiz);
+        } // FOR
     } // RUN(APPLICATIONARGUMENTS)
 
 } // CLASS
