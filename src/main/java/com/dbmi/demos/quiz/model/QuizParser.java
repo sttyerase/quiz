@@ -1,5 +1,7 @@
 package com.dbmi.demos.quiz.model;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -10,7 +12,8 @@ import java.io.IOException;
 
 public class QuizParser {
 
-    private Quiz theQuiz = null;
+    private final Quiz   theQuiz;
+    private final Logger myLogger  = LoggerFactory.getLogger(QuizParser.class);
 
     public QuizParser(Quiz aQuiz) {
         this.theQuiz = aQuiz;
@@ -29,5 +32,6 @@ public class QuizParser {
         } catch (IOException ioe) {
             throw new QuizException("IO exception while creating parser: " + ioe);
         } // TRY-CATCH
+        myLogger.info("QUIZPARSER:   parsing complete:     " + theQuiz.getQuizName());
     } // PARSECONFIG(PROBE)
 } // CLASS

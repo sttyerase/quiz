@@ -35,8 +35,11 @@ public class QuizParseHandler extends DefaultHandler {
             thisQ.setCorrectAnswerNumber(va-1);
             break;
          case "choice":
+            break;
          case "explanation":
+            break;
          case "quiz":
+            thisQuiz.setQuizName(attrs.getValue("name"));
             break;
       } // SWITCH
    } // STARTELEMENT()

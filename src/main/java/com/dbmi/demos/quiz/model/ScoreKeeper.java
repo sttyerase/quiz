@@ -41,13 +41,13 @@ public class ScoreKeeper
    }
 
    public void scoreQuiz(QuestionList qList){
-      Question thisQ = null;
+      Question thisQ;
       totalAnswered = 0;
       totalCorrect = 0;
       totalQuestions = qList.getTheQuestions().size();
-      java.util.Enumeration myE = qList.getTheQuestions().elements();
+      java.util.Enumeration<Question> myE = qList.getTheQuestions().elements();
       while(myE.hasMoreElements()){
-         thisQ = (Question)myE.nextElement();
+         thisQ = myE.nextElement();
          if(thisQ.getAnswered())totalAnswered++;
          if(thisQ.getAnsweredCorrectly())totalCorrect++;
       }

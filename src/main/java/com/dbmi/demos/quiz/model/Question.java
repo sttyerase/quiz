@@ -1,13 +1,11 @@
 package com.dbmi.demos.quiz.model;
 
-import org.springframework.context.annotation.Bean;
-
 import java.beans.JavaBean;
 import java.util.Vector;
 
 /*
  * @author Daniel B. Moore <p>
- * <p>A class the models the components of a quiz question, containing the
+ * <p>A class that models the components of a quiz question, containing the
  * question, the possible answers and an identifier of the correct answer. </p>
  */
 @JavaBean
@@ -16,7 +14,7 @@ public class Question
    /** The text of the question */
    private String questionText = "";
    /** A list of possible choices. */
-   private Vector<String> choiceList = new Vector<>(100);
+   private final Vector<String> choiceList = new Vector<>(100);
    /** The index of the correct answer*/
    private int theAnswer = 0;
    /** The explanation of the correct answer */

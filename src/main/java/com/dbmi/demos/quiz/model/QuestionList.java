@@ -1,14 +1,11 @@
 package com.dbmi.demos.quiz.model;
 
-import org.springframework.context.annotation.Bean;
-
 import java.util.*;
 
 /*
  * @author Daniel B. Moore <p>
  */
 public class QuestionList {
-   private static final long serialVersionUID = 387094158321L;
    private int currentQuestionNumber = 0;
    private Vector<Question> theQuestions;
 
