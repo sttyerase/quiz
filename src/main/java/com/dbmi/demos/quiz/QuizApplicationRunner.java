@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -23,6 +24,11 @@ public class QuizApplicationRunner implements ApplicationRunner {
     private final Logger myLogger = LoggerFactory.getLogger(ApplicationRunner.class);
     private final ResourceLoader myResourceLoader = new DefaultResourceLoader(this.getClass().getClassLoader());
     private final Vector<Quiz>   theQuizes        = new Vector<>(200);
+
+    @Bean
+    Vector<Quiz> getTheQuizes(){
+        return theQuizes;
+    }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
