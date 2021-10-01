@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -26,9 +27,16 @@ public class QuizApplicationRunner implements ApplicationRunner {
     private final Vector<Quiz>   theQuizes        = new Vector<>(200);
 
     @Bean
+    public ResourceBundleMessageSource messageSource() {
+        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+        messageSource.setBasename("application");
+        return messageSource;
+    } // MESSAGESOURCE()
+
+    @Bean
     Vector<Quiz> getTheQuizes(){
         return theQuizes;
-    }
+    } // GETTHEQUIZES()
 
     @Override
     public void run(ApplicationArguments args) throws Exception {

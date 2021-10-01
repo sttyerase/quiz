@@ -1,18 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Quiz Selection</title>
-    <link href="../static/css/QuizSite.css" th:href="@{css/QuizSite.css}" rel="stylesheet" media="screen"/>
+    <!-- th:href must use leading / in path definition. -->
+    <link href="../static/css/QuizSite.css" th:href="@{/css/QuizSite.css}" rel="stylesheet" media="screen"/>
 </head>
 <body>
   <h2>Welcome to the Quiz site</h2>
-  <p>Please choose a quiz below:</p>
-  <select>
-      <option value="Quiz 01">Quiz 01</option>
-      <option value="Quiz 02">Quiz 02</option>
-      <option value="Quiz 03">Quiz 03</option>
-  </select>
-<p><span th:text="#{welcome.message}" /></p>
+  <div>Please choose a quiz below:
+      <div>
+          <label>
+              <select th:name="*{quizName}">
+                  <option th:each="qz : ${myQuizes}" th:value="${qz.quizName}" th:text="${qz.quizName}"></option>
+              </select>
+          </label>
+      </div>
+  </div>
+  <p th:text="#{welcome.message}" >Welcome message goes here.</p>
+  <p th:text="${today}">Today</p>
+  <p th:text="${rando}">this is for stupid</p>
 </body>
 </html>
+
+<!--
+          <label>
+              <select th:field="*{quizName}">
+                  <option th:each="qz : ${myQuizes}" th:value="${qz.quizName}" th:text="${qz.quizName}"></option>
+              </select>
+          </label>
+
+          <table>
+              <tbody>
+                  <tr th:each="qz : ${myQuizes}" th:field="${qz}">
+                      <td th:text="${qz.quizName}"></td>
+                  </tr>
+              </tbody>
+          </table>
+
+-->
