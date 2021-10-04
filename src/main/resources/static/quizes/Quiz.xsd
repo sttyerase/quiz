@@ -6,4 +6,28 @@
     </xsd:documentation>
   </xsd:annotation>
 
+  <xsd:element name="quiz" type="quiztype"/>
+  <xsd:complexType name="quiztype">
+    <xsd:sequence>
+      <xsd:element name="question" type="questiontype"/>
+    </xsd:sequence>
+    <xsd:attribute name="name" type="xsd:string"/>
+  </xsd:complexType>
+
+  <xsd:complexType name="questiontype">
+     <xsd:sequence>
+       <xsd:element name="questiontext" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+       <xsd:element name="choicelist" type="choicelisttype" minOccurs="1" maxOccurs="1"/>
+       <xsd:element name="explanation" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     </xsd:sequence>
+    <xsd:attribute name="questionnumber" type="xsd:positiveInteger"/>
+  </xsd:complexType>
+
+  <xsd:complexType name="choicelisttype">
+    <xsd:sequence>
+      <xsd:element name="choice" type="xsd:string"/>
+    </xsd:sequence>
+    <xsd:attribute name="validanswer" type="xsd:positiveInteger" use="required"/>
+  </xsd:complexType>
+
 </xsd:schema>
