@@ -1,33 +1,33 @@
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <xsd:annotation>
-    <xsd:documentation xml:lang="en">
-      Schema definition for a Serviceprobe configuration file
-      Copyright 2021 D.B. Moore. All rights reserved.
-    </xsd:documentation>
-  </xsd:annotation>
-
-  <xsd:element name="quiz" type="quiztype"/>
-  <xsd:complexType name="quiztype">
-    <xsd:sequence>
-      <xsd:element name="question" type="questiontype"/>
-    </xsd:sequence>
-    <xsd:attribute name="name" type="xsd:string"/>
-  </xsd:complexType>
-
-  <xsd:complexType name="questiontype">
-     <xsd:sequence>
-       <xsd:element name="questiontext" type="xsd:string" minOccurs="1" maxOccurs="1"/>
-       <xsd:element name="choicelist" type="choicelisttype" minOccurs="1" maxOccurs="1"/>
-       <xsd:element name="explanation" type="xsd:string" minOccurs="1" maxOccurs="1"/>
-     </xsd:sequence>
-    <xsd:attribute name="questionnumber" type="xsd:positiveInteger"/>
-  </xsd:complexType>
-
-  <xsd:complexType name="choicelisttype">
-    <xsd:sequence>
-      <xsd:element name="choice" type="xsd:string"/>
-    </xsd:sequence>
-    <xsd:attribute name="validanswer" type="xsd:positiveInteger" use="required"/>
-  </xsd:complexType>
-
-</xsd:schema>
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="quizspace" xmlns:ns1="quizspace">
+  <xs:element name="quiz">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="ns1:question"/>
+      </xs:sequence>
+      <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="question">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ns1:questionText"/>
+        <xs:element ref="ns1:choiceList"/>
+        <xs:element ref="ns1:explanation"/>
+      </xs:sequence>
+      <xs:attribute name="number" use="required" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="questionText" type="xs:string"/>
+  <xs:element name="choiceList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="ns1:choice"/>
+      </xs:sequence>
+      <xs:attribute name="type" use="required" type="xs:NCName"/>
+      <xs:attribute name="validAnswer" use="required" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="choice" type="xs:string"/>
+  <xs:element name="explanation" type="xs:string"/>
+</xs:schema>
