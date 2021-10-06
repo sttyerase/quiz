@@ -16,7 +16,6 @@ import org.springframework.ui.Model;
 import com.dbmi.demos.quiz.model.Quiz;
 
 @Controller
-@RequestMapping("/quiz")
 public class QuizController {
     private final Logger myLogger = LoggerFactory.getLogger(QuizController.class);
 
@@ -24,20 +23,17 @@ public class QuizController {
     private Vector<Quiz> myQuizes;
 
     // MAPPINGS
-    @GetMapping("/welcome")
-    public ResponseEntity<String> welcome(){
-        HttpHeaders headers = new HttpHeaders();
-        myLogger.debug("welcome page displayed");
-        return new ResponseEntity<>("Welcome to the Quiz. Quizes available: " + myQuizes.size() + " ===> " + new Date(),headers, HttpStatus.OK);
-    } // WELCOME()
 
-    @RequestMapping("/hello")
-    public String hello(Model aModel) {
-        String rando = "I am some random string in the middle of your page.";
-        aModel.addAttribute("rando", rando);
+    @RequestMapping("/")
+    public String home(Model aModel) {
+        return this.welcome(aModel);
+    } // HOME
+
+    @RequestMapping("/welcome")
+    public String welcome(Model aModel) {
         aModel.addAttribute("myQuizes",myQuizes);
         aModel.addAttribute("today",new Date().toString());
         return "welcome";
-    }
+    } // WELCOME(MODEL)
 
 } // CLASS

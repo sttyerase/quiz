@@ -4,3 +4,11 @@ h1,h2 {
 	background-color: cornsilk;
 	text-align: center;
 }
+
+.formdiv {
+	background-color: lightcyan;
+}
+
+.errorstyle{
+	font-style: oblique;
+}

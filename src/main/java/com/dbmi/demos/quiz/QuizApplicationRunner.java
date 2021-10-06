@@ -29,7 +29,7 @@ public class QuizApplicationRunner implements ApplicationRunner {
     @Bean
     public ResourceBundleMessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasename("application");
+        messageSource.setBasename("application");  // basename = name of file that contains the properties, eg., application.properties
         return messageSource;
     } // MESSAGESOURCE()
 
