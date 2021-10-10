@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<quiz name="Basic Math Quiz" xmlns="quizspace">
+   <question number="1">
+      <questionText>
+         What is the result of adding 1 + 1
+      </questionText>
+      <choiceList type="CHECKBOX" validAnswer="1">
+         <choice>
+            2
+         </choice>
+         <choice>
+            3
+         </choice>
+         <choice>
+           7
+         </choice>
+         <choice>
+           10
+         </choice>
+         <choice>
+           0
+         </choice>
+      </choiceList>
+      <explanation>
+        Adding 1 + 1 = 2
+      </explanation>
+   </question>
+</quiz>

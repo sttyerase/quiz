@@ -3,8 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Quiz Question</title>
+    <link href="../static/css/QuizSite.css" th:href="@{/css/QuizSite.css}" rel="stylesheet" media="screen"/>
+    <script src="../scripts/common.js"></script> <!-- does not like <script ..... />  must use closing tag -->
 </head>
 <body>
-
+  <h3>Question number: <span th:text="${questionnumber}"/></h3>
+  <h3>Quiz Title: <span th:text="${myQuizes[0].getQuizName()}"></span></h3>
+  <p class="datetime" th:text="${today}">Today, Now</p>
+  <input type="button" class="backbutton" value="go back" onclick="goBack()"/>
 </body>
 </html>

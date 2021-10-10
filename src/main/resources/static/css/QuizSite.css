@@ -12,3 +12,13 @@ h1,h2 {
 .errorstyle{
 	font-style: oblique;
 }
+
+.selectclass {
+	background-color: crimson;
+	color: aliceblue;
+}
+
+.datetime{
+	font-size: xx-small;
+	background-color: darkkhaki;
+}
