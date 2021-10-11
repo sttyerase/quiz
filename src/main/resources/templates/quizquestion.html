@@ -7,8 +7,8 @@
     <script src="../scripts/common.js"></script> <!-- does not like <script ..... />  must use closing tag -->
 </head>
 <body>
-  <h3>Question number: <span th:text="${questionnumber}"/></h3>
-  <h3>Quiz Title: <span th:text="${myQuizes[0].getQuizName()}"></span></h3>
+  <h3>Quiz Title: <span th:text="${selectedquizname}"></span></h3>
+  <h4>Question number: <span th:text="${questionnumber}"/></h4>
   <p class="datetime" th:text="${today}">Today, Now</p>
   <input type="button" class="backbutton" value="go back" onclick="goBack()"/>
 </body>

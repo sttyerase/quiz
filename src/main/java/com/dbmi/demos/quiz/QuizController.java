@@ -43,12 +43,19 @@ public class QuizController {
 
     @PostMapping("/displayquestion")
     public String quizquestion(Model aModel, HttpServletRequest request, HttpServletResponse response) {
-        int qnum = Integer.parseInt(request.getParameter("questionnumber"));
+        // SESSION MANAGEMENt
         HttpSession mySession = request.getSession();
         Enumeration<String> en = mySession.getAttributeNames();
+        // GET PARAMETERS
+        Enumeration<String> pn = request.getParameterNames();  // TODO: FOR DEBUG REMOVE BEFORE PUBLISHING
+        int qnum = Integer.parseInt(request.getParameter("questionnumber")) + 1;
+        String selectedQuizName = request.getParameter("welcomeselect");
+
+        // ADD COMPONENTS TO THE MODEL
         aModel.addAttribute("myQuizes",myQuizes);
-        aModel.addAttribute("questionnumber",qnum + 1);
+        aModel.addAttribute("questionnumber",qnum);
         aModel.addAttribute("today",new Date().toString());
+        aModel.addAttribute("selectedquizname",selectedQuizName);
         return "quizquestion";
     } // QUIZQUESTION(MODEL)
 

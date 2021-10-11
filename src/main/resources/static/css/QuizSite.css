@@ -21,4 +21,12 @@ h1,h2 {
 .datetime{
 	font-size: xx-small;
 	background-color: darkkhaki;
+	size: 200px;
+}
+
+#datetimetable {
+}
+
+table {
+	width: 100%;
 }

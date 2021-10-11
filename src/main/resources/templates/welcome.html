@@ -3,7 +3,7 @@
       xsi:schemaLocation="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Quiz Selection</title>
+    <title>Welcome: Quiz Selection</title>
     <!-- th:href must use leading / in path definition. -->
     <link href="../static/css/QuizSite.css" th:href="@{/css/QuizSite.css}" rel="stylesheet" media="screen"/>
     <script src="../scripts/common.js"></script>
@@ -11,21 +11,30 @@
 <body>
 <h2>Welcome to the Quiz site</h2>
 <div class="formdiv">Please choose a quiz below:
+    <div class="selectdiv">
+        <label>
+            <select class="selectclass" name="welcomeselect" form="quizselect">
+                <option th:each="qz : ${myQuizes}" th:value="${qz.quizName}" th:text="${qz.quizName}">placeholder
+                </option>
+            </select>
+        </label>
+    </div>
     <form id="quizselect" action="#" method="post" th:action="@{/displayquestion}">
         <!-- <input type="hidden" th:name="questionnumber" th:value="${questionnumber}"/> -->
         <input type="hidden" name="questionnumber" value="0">
         <input type="submit" value="SUBMIT"/>
     </form>
 </div>
-<div class="selectdiv">
-    <label>
-        <select class="selectclass" th:name="*{quizName}" form="quizselect" id="welcomeselect">
-            <option th:each="qz : ${myQuizes}" th:value="${qz.quizName}" th:text="${qz.quizName}">placeholder
-            </option>
-        </select>
-    </label>
+<div class="datetime" th:cols="3">
+    <table id="datetimetable">
+        <tbody>
+        <tr>
+            <td th:text="#{welcomepage.message}">welcome message goes here</td>
+            <td></td>
+            <td th:text="${today}">Today, Now</td>
+        </tr>
+        </tbody>
+    </table>
 </div>
-<p th:text="#{welcomepage.message}">Welcome message goes here.</p>
-<p class="datetime" th:text="${today}">Today, Now</p>
 </body>
 </html>
