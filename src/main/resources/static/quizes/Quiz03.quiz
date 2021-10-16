@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
-<quiz name="Basic Math Quiz" xmlns="quizspace">
+<quiz name="Basic Math Exam" xmlns="quizspace">
    <question number="1">
       <questionText>
          What is the result of adding 1 + 1
