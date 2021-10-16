@@ -18,15 +18,30 @@ h1,h2 {
 	color: aliceblue;
 }
 
+.questiondiv {
+	background-color: lavender;
+}
+
 .datetime{
 	font-size: xx-small;
 	background-color: darkkhaki;
 	size: 200px;
 }
 
-#datetimetable {
+.dtfirstcol .dtsecondcol {
+	width: 35%;
+	border-color: darkred;
+}
+
+.dtsecondcol {
+	width: 30%;
+	text-align: center;
 }
 
 table {
 	width: 100%;
+}
+
+#selectdiv{
+	background-color: bisque;
 }
