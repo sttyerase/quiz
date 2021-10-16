@@ -37,25 +37,22 @@ public class QuizController {
         HttpSession mySession = request.getSession(true);
         aModel.addAttribute("myQuizes",myQuizes);
         aModel.addAttribute("today",new Date().toString());
-        System.out.println("YEP!");
         return "welcome";
     } // WELCOME(MODEL)
 
     @PostMapping("/displayquestion")
     public String quizquestion(Model aModel, HttpServletRequest request, HttpServletResponse response) {
-        // SESSION MANAGEMENt
+        // SESSION MANAGEMENT
         HttpSession mySession = request.getSession();
         Enumeration<String> en = mySession.getAttributeNames();
         // GET PARAMETERS
-        Enumeration<String> pn = request.getParameterNames();  // TODO: FOR DEBUG REMOVE BEFORE PUBLISHING
         int qnum = Integer.parseInt(request.getParameter("questionnumber")) + 1;
-        String selectedQuizName = request.getParameter("welcomeselect");
+        int selectedQuiz = Integer.parseInt(request.getParameter("welcomeselect"));
 
         // ADD COMPONENTS TO THE MODEL
-        aModel.addAttribute("myQuizes",myQuizes);
         aModel.addAttribute("questionnumber",qnum);
         aModel.addAttribute("today",new Date().toString());
-        aModel.addAttribute("selectedquizname",selectedQuizName);
+        aModel.addAttribute("selectedquiz",myQuizes.elementAt(selectedQuiz));
         return "quizquestion";
     } // QUIZQUESTION(MODEL)
 

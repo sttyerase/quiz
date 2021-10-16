@@ -1,20 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Welcome: Quiz Selection</title>
     <!-- th:href must use leading / in path definition. -->
     <link href="../static/css/QuizSite.css" th:href="@{/css/QuizSite.css}" rel="stylesheet" media="screen"/>
-    <script src="../scripts/common.js"></script>
+    <script src="../static/scripts/common.js"></script>
 </head>
 <body>
 <h2>Welcome to the Quiz site</h2>
 <div class="formdiv">Please choose a quiz below:
-    <div class="selectdiv">
+    <div id="selectdiv">
         <label>
             <select class="selectclass" name="welcomeselect" form="quizselect">
-                <option th:each="qz : ${myQuizes}" th:value="${qz.quizName}" th:text="${qz.quizName}">placeholder
+                <option th:each="qz : ${myQuizes}" th:value="${qzStat.index}" th:text="${qz.quizName}">placeholder
                 </option>
             </select>
         </label>
@@ -25,13 +24,13 @@
         <input type="submit" value="SUBMIT"/>
     </form>
 </div>
-<div class="datetime" th:cols="3">
+<div class="datetime">
     <table id="datetimetable">
         <tbody>
         <tr>
-            <td th:text="#{welcomepage.message}">welcome message goes here</td>
-            <td></td>
-            <td th:text="${today}">Today, Now</td>
+            <td class="dtfirstcol"  th:text="#{welcomepage.message}">welcome message goes here</td>
+            <td class="dtsecondcol" th:text=" II "></td>
+            <td class="dtthirdcol"  th:text="${today}">Today, Now</td>
         </tr>
         </tbody>
     </table>
