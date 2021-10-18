@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+   This schema provides validation for multiple choice quiz documents written in XML.
+-->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="quizspace" xmlns:ns1="quizspace">
   <xs:element name="quiz">
     <xs:complexType>

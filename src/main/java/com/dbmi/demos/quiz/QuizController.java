@@ -1,5 +1,6 @@
 package com.dbmi.demos.quiz;
 
+import com.dbmi.demos.quiz.model.QuestionList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,6 @@ public class QuizController {
 
     @Autowired
     private Vector<Quiz> myQuizes;
-    private String sillyString = "silly string";
 
     // MAPPINGS
 
@@ -44,15 +44,15 @@ public class QuizController {
     public String quizquestion(Model aModel, HttpServletRequest request, HttpServletResponse response) {
         // SESSION MANAGEMENT
         HttpSession mySession = request.getSession();
-        Enumeration<String> en = mySession.getAttributeNames();
+        Enumeration<String> en = mySession.getAttributeNames(); // TODO: REMOVE AFTER DEBUGGING
         // GET PARAMETERS
-        int qnum = Integer.parseInt(request.getParameter("questionnumber")) + 1;
-        int selectedQuiz = Integer.parseInt(request.getParameter("welcomeselect"));
-
+        int quiznum = Integer.parseInt(request.getParameter("welcomeselect"));
+        Quiz theQuiz = myQuizes.elementAt(quiznum);
+        String quizName = theQuiz.getQuizName();
+        QuestionList theQuestionList = theQuiz.getQuestionList();
         // ADD COMPONENTS TO THE MODEL
-        aModel.addAttribute("questionnumber",qnum);
+        aModel.addAttribute("thequiz",theQuiz);
         aModel.addAttribute("today",new Date().toString());
-        aModel.addAttribute("selectedquiz",myQuizes.elementAt(selectedQuiz));
         return "quizquestion";
     } // QUIZQUESTION(MODEL)
 

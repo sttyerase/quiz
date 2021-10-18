@@ -56,7 +56,6 @@ public class QuizApplicationRunner implements ApplicationRunner {
             // PARSE QUIZ FILES. CREATE QUIZ OBJECTS.
             for(String indx : quizfiles){
                 Quiz myNewQuiz = new Quiz(quizdir + "/" + indx);
-                myNewQuiz.createQuiz();
                 myLogger.info("    new quiz name: " + myNewQuiz.getQuizName());
                 theQuizes.add(myNewQuiz);
             } // FOR

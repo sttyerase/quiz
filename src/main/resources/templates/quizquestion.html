@@ -4,24 +4,27 @@
     <meta charset="UTF-8">
     <title>Quiz Question</title>
     <link href="../static/css/QuizSite.css" th:href="@{/css/QuizSite.css}" rel="stylesheet" media="screen"/>
-    <script src="../static/scripts/common.js" th:src="@{/scripts/common.js}"></script> <!-- does not like <script ..... />  must use closing tag -->
+    <script src="../static/scripts/common.js" th:src="@{/scripts/common.js}"></script>
+    <!-- does not like <script ..... />  must use closing tag -->
 </head>
 <body>
 <div class="questiondiv">
-  <h3>Quiz Title: <span th:text="${selectedquiz.getQuizName()}"></span></h3>
-  <h4>Question number: <span th:text="${questionnumber}"/></h4>
-  <input type="button" class="backbutton" value="go back" onclick="goBack()"/>
+    <h3>Quiz Title: <span th:text="${thequiz.getQuizName()}"></span></h3>
+    <h4>Question number: <span th:text="${thequiz.getQuestionList().getCurrentQuestionNumber()}"/></h4>
+    <input type="button" class="backbutton" value="go back" onclick="goBack()"/>
+    <div id="#questiondisplay">
+    </div>
 </div>
-  <div class="datetime">
-      <table id="datetimetable">
-          <tbody>
-          <tr>
-              <td class="dtfirstcol"  th:text="#{questionpage.message}">welcome message goes here</td>
-              <td class="dtsecondcol" th:text=" II "></td>
-              <td class="dtthirdcol"  th:text="${today}">Today, Now</td>
-          </tr>
-          </tbody>
-      </table>
-  </div>
+<div class="datetime">
+    <table id="datetimetable">
+        <tbody>
+        <tr>
+            <td class="dtfirstcol" th:text="#{questionpage.message}">welcome message goes here</td>
+            <td class="dtsecondcol" th:text=" II "></td>
+            <td class="dtthirdcol" th:text="${today}">Today, Now</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

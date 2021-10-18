@@ -42,7 +42,7 @@ public class QuestionList {
          aQ.setAnswered(false);
          aQ.setAnsweredCorrectly(false);
       } // WHILE
-         
+
    } // INITQUESTIONLIST()
 
    public int getNumberOfQuestions(){
