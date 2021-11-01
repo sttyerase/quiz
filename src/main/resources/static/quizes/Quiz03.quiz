@@ -25,4 +25,32 @@
         Adding 1 + 1 = 2
       </explanation>
    </question>
+   <question number="1">
+      <questionText>
+         What is the result of multiplying 4 by 3
+      </questionText>
+      <choiceList type="CHECKBOX" validAnswer="4">
+         <choice>
+            2
+         </choice>
+         <choice>
+            4
+         </choice>
+         <choice>
+            8
+         </choice>
+         <choice>
+            12
+         </choice>
+         <choice>
+            16
+         </choice>
+         <choice>
+            32
+         </choice>
+      </choiceList>
+      <explanation>
+         Adding 1 + 1 = 2
+      </explanation>
+   </question>
 </quiz>

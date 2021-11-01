@@ -45,3 +45,12 @@ table {
 #selectdiv{
 	background-color: bisque;
 }
+
+.boxed {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-style: solid;
+	border-color: black;
+	border-width: 3px;
+}
