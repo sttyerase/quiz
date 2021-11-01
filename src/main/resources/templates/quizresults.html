@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Question</title>
+    <link href="../static/css/QuizSite.css" th:href="@{/css/QuizSite.css}" rel="stylesheet" media="screen"/>
+    <script src="../static/scripts/common.js" th:src="@{/scripts/common.js}"></script>
+</head>
+<body>
+<h4>This is the results page.</h4>
+<div class="datetime">
+    <table id="datetimetable">
+        <tbody>
+        <tr>
+            <td class="dtfirstcol"  th:text="#{questionpage.message}">welcome message goes here</td>
+            <td class="dtsecondcol" th:text=" II "></td>
+            <td class="dtthirdcol"  th:text="${today}">Today, Now</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
