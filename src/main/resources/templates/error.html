@@ -7,16 +7,11 @@
 </head>
 <body>
     <h2 th:text="#{errorpage.header}">This is an error page: </h2>
-    <div th:if="${#fields.hasAnyErrors()}">
-        <ul>
-            <li th:each="err : ${#fields.allErrors()}" th:text="${err}" />
-        </ul>
-    </div>
     <div class="datetime">
         <table id="datetimetable">
             <tbody>
             <tr>
-                <td class="dtfirstcol"  th:text="#{welcomepage.message}">welcome message goes here</td>
+                <td class="dtfirstcol"  th:text="#{errorpage.trailer.message}">welcome message goes here</td>
                 <td class="dtsecondcol" th:text=" II "></td>
                 <td class="dtthirdcol"  th:text="${today}">Today, Now</td>
             </tr>
