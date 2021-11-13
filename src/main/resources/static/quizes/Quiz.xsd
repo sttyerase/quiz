@@ -21,7 +21,7 @@
       <xs:attribute name="number" use="required" type="xs:integer"/>
     </xs:complexType>
   </xs:element>
-  <xs:element name="questionText" type="xs:string"/>
+  <xs:element name="questionText" type="xs:normalizedString"/>
   <xs:element name="choiceList">
     <xs:complexType>
       <xs:sequence>
@@ -32,5 +32,5 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="choice" type="xs:string"/>
-  <xs:element name="explanation" type="xs:string"/>
+  <xs:element name="explanation" type="xs:normalizedString"/>
 </xs:schema>

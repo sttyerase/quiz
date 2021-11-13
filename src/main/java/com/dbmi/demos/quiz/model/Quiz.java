@@ -12,6 +12,7 @@ public class Quiz{
    private final QuestionList myQuestionList;
    private       String       quizName = "";
    private final Logger       myLogger = LoggerFactory.getLogger(Quiz.class);
+   private final ScoreKeeper  scoreKeeper = new ScoreKeeper();
 
    /**
     * Constructor to build a quiz
@@ -28,9 +29,9 @@ public class Quiz{
    } // CONSTRUCTOR(STRING)
 
    /** This method calls the XML parser to build Question
-    *  objects to add to the QuestionList from the XML document.
+    *  objects from the document content.
     */
-   public void createQuiz() throws QuizException{
+   public void createQuiz() throws QuizException {
       myLogger.info("QUIZ document:         " + theDocument);
       QuizParser myParser = new QuizParser(this);
       try {
@@ -41,6 +42,7 @@ public class Quiz{
       myLogger.debug("QUIZ:: name: " + this.getQuizName() + " :: num questions:   " + myQuestionList.getNumberOfQuestions());
    } // FILLQUESTIONLIST()
 
+   // GETTERS AND SETTERS
    public QuestionList getQuestionList() {
       return myQuestionList;
    } // GETQUESTIONLIST()
@@ -52,5 +54,9 @@ public class Quiz{
    public void setQuizName(String quizName) {
       this.quizName = quizName;
    } // SETQUIZNAME(STRING)
+
+   public ScoreKeeper getScoreKeeper() {
+      return scoreKeeper;
+   } // GETSCOREKEEPER()
 
 } // CLASS

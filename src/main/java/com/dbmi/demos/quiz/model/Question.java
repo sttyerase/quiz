@@ -24,6 +24,9 @@ public class Question
    /** Was it answered correctly? */
    private boolean answeredCorrectly = false;
 
+   /** The ordinal number of the current question in the quiz. **/
+   private int questionNumber;
+
    /**
     *  @return a string with the text of the question.
     */
@@ -33,6 +36,10 @@ public class Question
 
    public Vector<String> getChoiceList(){
       return choiceList;
+   }
+
+   public String[] getChoiceListArray() {
+      return choiceList.toArray(String[]::new);
    }
 
    public String getChoiceAt(int i){
@@ -101,5 +108,13 @@ public class Question
    public java.util.Enumeration<String> choiceElements(){
       return choiceList.elements();
    } // CHOICEELEMENTS()
+
+   public int getQuestionNumber() {
+      return questionNumber;
+   }
+
+   public void setQuestionNumber(int questionNumber) {
+      this.questionNumber = questionNumber;
+   }
 
 } // CLASS

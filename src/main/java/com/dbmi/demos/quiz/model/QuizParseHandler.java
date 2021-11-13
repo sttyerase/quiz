@@ -5,16 +5,16 @@ import org.xml.sax.helpers.DefaultHandler;
 
 @SuppressWarnings("unused")
 public class QuizParseHandler extends DefaultHandler {
-   private Quiz thisQuiz;
-   private Question thisQ;
+   private final Quiz theQuiz;
+   private Question question;
    private final QuestionList qList;
    private String charactersTempString = "";
    private int indx = 0;
 
    /** constructs a QuizParseHandler, passing the Quiz and QuestionList handles.*/
    public QuizParseHandler(Quiz aQuiz){
-      this.setThisQuiz(aQuiz);
-      this.qList = aQuiz.getQuestionList();
+      this.theQuiz = aQuiz;
+      this.qList = theQuiz.getQuestionList();
    } // CONSTRUCTOR
 
    /** Implements logic executed when a start of element is detected.
@@ -24,7 +24,7 @@ public class QuizParseHandler extends DefaultHandler {
    public void startElement(String uri,String localName,String qName, Attributes attrs){
       switch(localName){
          case "question":
-            thisQ  = new Question();
+            question = new Question();
             break;
          case "questionText":
             charactersTempString = "";
@@ -32,14 +32,16 @@ public class QuizParseHandler extends DefaultHandler {
          case "choiceList":
             setIndx(0);
             int va = Integer.parseInt(attrs.getValue("validAnswer"));
-            thisQ.setCorrectAnswerNumber(va-1);
+            question.setCorrectAnswerNumber(va-1);
+            charactersTempString = "";
             break;
          case "choice":
             break;
          case "explanation":
+            charactersTempString = "";
             break;
          case "quiz":
-            thisQuiz.setQuizName(attrs.getValue("name"));
+            theQuiz.setQuizName(attrs.getValue("name"));
             break;
       } // SWITCH
    } // STARTELEMENT()
@@ -48,7 +50,7 @@ public class QuizParseHandler extends DefaultHandler {
     * //@exception org.xml.sax.SAXException
     */
    public void characters(char[] ch, int start, int length){
-      charactersTempString = new String(ch,start,length);
+      charactersTempString = new String(ch,start,length).strip();
    } // CHARACTERS()
 
    /** Implements logic executed when and end of element is detected.
@@ -58,19 +60,20 @@ public class QuizParseHandler extends DefaultHandler {
    public void endElement(String uri,String localName,String qName){
       switch (localName){
          case "question":
-            qList.getTheQuestions().addElement(thisQ);
+            qList.getTheQuestions().addElement(question);
             break;
          case "questionText":
-            thisQ.setQuestionText(charactersTempString.replace('\n', ' '));
+            question.setQuestionText(charactersTempString.replace('\n', ' '));
+            break;
          case "choiceList":
-            thisQ.trimChoiceToSize();
+            question.trimChoiceToSize();
             break;
          case "choice":
             setIndx(getIndx() + 1);
-            thisQ.addChoiceElement(charactersTempString.replace('\n', ' '));
+            question.addChoiceElement(charactersTempString.replace('\n', ' '));
             break;
          case "explanation":
-            thisQ.setExplanation(charactersTempString.replace('\n', ' '));
+            question.setExplanation(charactersTempString.replace('\n', ' '));
             break;
          case "quiz":
             break;
@@ -87,14 +90,6 @@ public class QuizParseHandler extends DefaultHandler {
    public void endDocument(){
       qList.getTheQuestions().trimToSize();
    } // ENDDOCUMENT()
-
-   public Quiz getThisQuiz() {
-      return thisQuiz;
-   } // GETTHISQUIZ()
-
-   public void setThisQuiz(Quiz thisQuiz) {
-      this.thisQuiz = thisQuiz;
-   } // SETTHISQUIZ(QUIZ)
 
    public int getIndx() {
       return indx;

@@ -23,6 +23,7 @@ public class QuizParser {
         try {
             SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
             saxParserFactory.setNamespaceAware(true);
+            saxParserFactory.setValidating(true);
             SAXParser myParser = saxParserFactory.newSAXParser();
             myParser.parse(new File(aURI),new QuizParseHandler(theQuiz));
         } catch (ParserConfigurationException pce) {

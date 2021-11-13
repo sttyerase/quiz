@@ -28,7 +28,7 @@ public class QuestionList {
 
    public void setTheQuestions(Vector<Question> theQuestions) {
       this.theQuestions = theQuestions;
-   } // SETTHEQUESTIONLIST(VECTOR)
+   } // SETTHEQUESTIONS(VECTOR)
 
    public boolean notDone(){
       return this.currentQuestionNumber < theQuestions.size();
@@ -42,7 +42,7 @@ public class QuestionList {
          aQ.setAnswered(false);
          aQ.setAnsweredCorrectly(false);
       } // WHILE
-
+      this.setCurrentQuestionNumber(0);
    } // INITQUESTIONLIST()
 
    public int getNumberOfQuestions(){

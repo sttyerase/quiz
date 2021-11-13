@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
-<quiz name="Basic Chemistry Quiz" xmlns="quizspace">
+<quiz name="Basic Chemistry Quiz" xmlns="quizspace" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="Quiz.xsd">
    <question number="1">
       <questionText>
          Which of the following is not a heavy metal?
@@ -22,8 +22,7 @@
          </choice>
       </choiceList>
       <explanation>
-         Lithium is not a heavy metal, but one of the group "alkalai metals" which includes sodium, potassium, rubidium, caesium and
-         francium.
+         Lithium is not a heavy metal, but one of the group "alkalai metals" which includes sodium, potassium, rubidium, caesium and francium.
       </explanation>
    </question>
 </quiz>
