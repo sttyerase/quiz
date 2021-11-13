@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Quiz Question</title>
@@ -9,11 +9,22 @@
 </head>
 <body>
 <div class="questiondiv">
-    <h3>Quiz Title: <span th:text="${thequiz.getQuizName()}"></span></h3>
-    <h4>Question number: <span th:text="${thequiz.getQuestionList().getCurrentQuestionNumber()}"/></h4>
-    <input type="button" class="backbutton" value="go back" onclick="goBack()"/>
-    <div id="#questiondisplay">
-    </div>
+    <h3>Quiz Title: <span th:text="${quizname}"></span></h3>
+    <h4>Total questions: <span th:text="${numberofquestions}"/></h4>
+    <h4>Question number: <span th:text="${userquestionnumber}"/></h4>
+    <form id="questionform" action="#" method="post" th:action="@{/displayanswer}" th:object="${currentquestion}">
+        <div id="questiondisplay">
+            <h4 th:text="${currentquestion.getQuestionText()}"></h4>
+            <label for="questionchoices">Choose one correct answer</label>
+            <input form="questionform" class="boxed" type="radio" name="myradio" id="questionchoices" style="display: list-item"
+                                                        th:each="cla : ${currentquestion.getChoiceListArray()}"
+                                                        th:value="${claStat.index} + 1" th:text="${cla}"/>
+            <div class="submit">
+                <input type="submit" value="SUBMIT ANSWER">
+            </div>
+        </div>
+        <input type="button" class="backbutton" value="go back" onclick="goBack()"/>
+    </form>
 </div>
 <div class="datetime">
     <table id="datetimetable">

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Quiz Question</title>
@@ -8,6 +8,9 @@
 </head>
 <body>
 <h4>This is the results page.</h4>
+<form id="questionform" action="#" method="post" th:action="@{/welcome}">
+    <input type="submit" value="RETURN TO QUIZ SELECTION"/>
+</form>
 <div class="datetime">
     <table id="datetimetable">
         <tbody>
