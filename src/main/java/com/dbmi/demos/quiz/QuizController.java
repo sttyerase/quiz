@@ -29,28 +29,27 @@ public class QuizController {
     // MAPPINGS
     @RequestMapping("/")
     public String home(Model aModel, HttpServletRequest request) {
-        myLogger.info("Requested root page.");
+        myLogger.trace("Requested root page.");
         return this.welcome(aModel, request);
     } // HOME
 
     @RequestMapping("/welcome")
     public String welcome(Model aModel, HttpServletRequest request) {
-        myLogger.info("Requested welcome page.");
+        myLogger.trace("Requested welcome page.");
         request.getSession().invalidate();
         HttpSession mySession = request.getSession(true);
-        mySession.setAttribute("questionnumber", 0);
         aModel.addAttribute("myQuizes", myQuizes);
         aModel.addAttribute("today", new Date().toString());
         return "welcome";
     } // WELCOME(MODEL)
 
-    @PostMapping("/initiatequiz")
+    @PostMapping("/initiatequiz")  // INITIATE THE QUIZ AND PASS THROUGH TO FIRST QUESTION /DISPLAYQUESTION
     public String initiatequiz(Model aModel, HttpServletRequest request) {
         // SESSION MANAGEMENT
-        myLogger.info("INITIATEQUIZ: page requested.");
+        myLogger.trace("INITIATEQUIZ: page requested.");
         HttpSession mySession = request.getSession(false);
         if (mySession == null) {
-            myLogger.info("INITIATEQUIZ: no session passed with request. Exiting now.");
+            myLogger.error("INITIATEQUIZ: no session passed with request. Exiting now.");
             return this.error(aModel,request,"INITIATEQUIZ: no session passed with request. Exiting now.");
         } // IF(MYSESSION)
         int quiznum = Integer.parseInt(request.getParameter("welcomeselect"));
@@ -63,51 +62,62 @@ public class QuizController {
 
     @RequestMapping("/displayquestion")
     public String displayquestion(Model aModel, HttpServletRequest request) {
-        myLogger.info("DISPLAYQUESTION: requested.");
+        myLogger.trace("DISPLAYQUESTION: requested.");
         Quiz theQuiz = (Quiz) request.getSession().getAttribute("thequiz");
         // IF THE QUIZ IS DONE, RETURN THE RESULTS
-        if (theQuiz.getQuestionList().notDone()) {
-            /* CONTINUE ON */
-        } else {
-            return this.quizresults(aModel, request);
-        } // IF(QL.NOTDONE)
         QuestionList theQuestionList = theQuiz.getQuestionList();
         int currentQuestionNumber = theQuestionList.getCurrentQuestionNumber();
         theQuestionList.setCurrentQuestionNumber(currentQuestionNumber);
         Question currentQuestion = theQuestionList.getTheQuestions().elementAt(currentQuestionNumber);
-        int numberOfQuestions = theQuestionList.getNumberOfQuestions();
         // ADD COMPONENTS TO THE MODEL
-        aModel.addAttribute("quizname", theQuiz.getQuizName());
-        aModel.addAttribute("numberofquestions", numberOfQuestions);
-        aModel.addAttribute("currentquestion", currentQuestion);
-        aModel.addAttribute("userquestionnumber", currentQuestionNumber + 1);  // THE USER QUESTION NUMBER IS ARRAY ADDRESS + 1
+        aModel.addAttribute("thequiz",theQuiz);
         aModel.addAttribute("today", new Date().toString());
-        return "quizquestion";
+        return "quizquestion";  // HTML TEMPLATE THAT DISPLAYS QUESTION DATA
     } // QUIZQUESTION(MODEL,HTTPSERVLETREQUEST,HTTPSERVLETRESPONSE)
 
-    @RequestMapping("/displayanswer")
+    @PostMapping("/displayanswer")
     public String theanswer(Model aModel, HttpServletRequest request) {
-        myLogger.info("DISPLAYANSWER: requested.");
+        String returnResponse;  // THE RESPONSE RETURNED TO THE PAGE
+        myLogger.trace("DISPLAYANSWER: requested.");
         Quiz theQuiz = (Quiz) request.getSession().getAttribute("thequiz");
+        int theResponse = Integer.parseInt(request.getParameter("questionchoices"));
+        int correctAnswer = theQuiz.getQuestionList().getTheQuestions().elementAt(theQuiz.getQuestionList().getCurrentQuestionNumber()).getCorrectAnswerNumber();
+        if(theResponse == correctAnswer) {
+            returnResponse = "You have chosen the correct answer.";
+            theQuiz.getScoreKeeper().setTotalCorrect(theQuiz.getScoreKeeper().getTotalCorrect() + 1); // INCREMENT CORRECT ANSWERS
+        } else {
+            returnResponse = "You missed this one. :( ";
+        } // IF-ELSE()
+        aModel.addAttribute("correctness",returnResponse);
         aModel.addAttribute("thequiz",theQuiz);
-        aModel.addAttribute("currentquestionnumber",theQuiz.getQuestionList().getCurrentQuestionNumber());
         aModel.addAttribute("today", new Date().toString());
-        theQuiz.getQuestionList().setCurrentQuestionNumber(theQuiz.getQuestionList().getCurrentQuestionNumber() + 1);
-        return "theanswer";
+        return "theanswer"; // HTML TEMPLATE THAT DISPLAYS THE ANSWER
     } // THEANSWER(MODEL,HTTPSERVLETREQUEST,HTTPSERVLETRESPONSE)
+
+    @RequestMapping("/nextquestion")
+    public String nextquestion(Model aModel, HttpServletRequest request) {
+        Quiz theQuiz = (Quiz) request.getSession().getAttribute("thequiz");
+        theQuiz.getQuestionList().setCurrentQuestionNumber(theQuiz.getQuestionList().getCurrentQuestionNumber() + 1);
+        if (theQuiz.getQuestionList().notDone()) {
+            return this.displayquestion(aModel,request);
+        } // IF(NOT DONE)
+        return this.quizresults(aModel,request);
+    } // NEXTQUESTION(MODEL,HTTPSERVLETREQUEST)
 
     @RequestMapping("/displayresults")
     public String quizresults(Model aModel, HttpServletRequest request) {
-        myLogger.info("DISPLAYRESULTS: requested.");
+        myLogger.trace("DISPLAYRESULTS: requested.");
         Quiz theQuiz = (Quiz) request.getSession().getAttribute("thequiz");
+        aModel.addAttribute("thequiz",theQuiz);
         aModel.addAttribute("today", new Date().toString());
         return "quizresults";
     } // QUIZRESULTS(MODEL,HTTPSERVLETREQUEST,HTTPSERVLETRESPONSE)
 
     @RequestMapping("/newerror")
     public String error(Model aModel, HttpServletRequest request, String errorMessage) {
-        myLogger.info("NEWERROR: requested.");
+        myLogger.trace("NEWERROR: requested.");
         Quiz theQuiz = (Quiz) request.getSession().getAttribute("thequiz");
+        aModel.addAttribute("thequiz",theQuiz);
         aModel.addAttribute("err", errorMessage);
         aModel.addAttribute("today", new Date().toString());
         return "error";

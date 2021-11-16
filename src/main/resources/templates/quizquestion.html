@@ -9,15 +9,15 @@
 </head>
 <body>
 <div class="questiondiv">
-    <h3>Quiz Title: <span th:text="${quizname}"></span></h3>
-    <h4>Total questions: <span th:text="${numberofquestions}"/></h4>
-    <h4>Question number: <span th:text="${userquestionnumber}"/></h4>
-    <form id="questionform" action="#" method="post" th:action="@{/displayanswer}" th:object="${currentquestion}">
+    <h3>Quiz Title: <span th:text="${thequiz.getQuizName()}"></span></h3>
+    <h4>Total questions: <span th:text="${thequiz.getQuestionList().getNumberOfQuestions()}"/></h4>
+    <h4>Question number: <span th:text="${thequiz.getQuestionList().getCurrentQuestionNumber() + 1}"/></h4>
+    <form id="questionform" action="#" method="post" th:action="@{/displayanswer}" th:object="${thequiz.getQuestionList().getCurrentQuestionNumber()}">
         <div id="questiondisplay">
-            <h4 th:text="${currentquestion.getQuestionText()}"></h4>
+            <h4 th:text="${thequiz.getQuestionList().getTheQuestions().elementAt(thequiz.getQuestionList().getCurrentQuestionNumber()).getQuestionText()}"></h4>
             <label for="questionchoices">Choose one correct answer</label>
-            <input form="questionform" class="boxed" type="radio" name="myradio" id="questionchoices" style="display: list-item"
-                                                        th:each="cla : ${currentquestion.getChoiceListArray()}"
+            <input form="questionform" class="boxed" type="radio" name="questionchoices" id="questionchoices" style="display: list-item"
+                                                        th:each="cla : ${thequiz.getQuestionList().getTheQuestions().elementAt(thequiz.getQuestionList().getCurrentQuestionNumber()).getChoiceListArray()}"
                                                         th:value="${claStat.index} + 1" th:text="${cla}"/>
             <div class="submit">
                 <input type="submit" value="SUBMIT ANSWER">

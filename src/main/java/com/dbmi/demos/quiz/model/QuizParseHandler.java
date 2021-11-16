@@ -32,7 +32,7 @@ public class QuizParseHandler extends DefaultHandler {
          case "choiceList":
             setIndx(0);
             int va = Integer.parseInt(attrs.getValue("validAnswer"));
-            question.setCorrectAnswerNumber(va-1);
+            question.setCorrectAnswerNumber(va);
             charactersTempString = "";
             break;
          case "choice":

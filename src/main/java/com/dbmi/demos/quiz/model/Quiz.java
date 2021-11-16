@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 public class Quiz{
    /** List of questions for this Quiz. */
    private final String       theDocument;
-   private final QuestionList myQuestionList;
+   private final QuestionList theQuestionList;
    private       String       quizName = "";
    private final Logger       myLogger = LoggerFactory.getLogger(Quiz.class);
    private final ScoreKeeper  scoreKeeper = new ScoreKeeper();
@@ -19,7 +19,7 @@ public class Quiz{
     * @param aQuizDoc XML document that conforms to the Quiz schema (Quiz.xsd)
     */
    public Quiz(String aQuizDoc) throws QuizException {
-      myQuestionList = new QuestionList(200);
+      theQuestionList = new QuestionList(200);
       this.theDocument = aQuizDoc;
       try {
          this.createQuiz();
@@ -39,12 +39,12 @@ public class Quiz{
       }catch(QuizException qe) {
          throw new QuizException("Caught parsing error: " + qe);
       } // TRY-CATCH
-      myLogger.debug("QUIZ:: name: " + this.getQuizName() + " :: num questions:   " + myQuestionList.getNumberOfQuestions());
+      myLogger.debug("QUIZ:: name: " + this.getQuizName() + " :: num questions:   " + theQuestionList.getNumberOfQuestions());
    } // FILLQUESTIONLIST()
 
    // GETTERS AND SETTERS
    public QuestionList getQuestionList() {
-      return myQuestionList;
+      return theQuestionList;
    } // GETQUESTIONLIST()
 
    public String getQuizName() {

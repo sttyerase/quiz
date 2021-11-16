@@ -7,11 +7,11 @@
     <script src="../static/scripts/common.js" th:src="@{/scripts/common.js}"></script>
 </head>
 <body>
-<h4>You are correct, sir!!</h4>
+<h4 th:text="${correctness}">You are correct, sir!!</h4>
 <div>
-    <h4 th:text="${thequiz.getQuestionList().getTheQuestions().elementAt(currentquestionnumber).getExplanation()}">explanation</h4>
+    <h4 th:text="${thequiz.getQuestionList().getTheQuestions().elementAt(thequiz.getQuestionList().getCurrentQuestionNumber()).getExplanation()}">explanation</h4>
 </div>
-<form method="post" id="answerform" action="#" th:action="@{/displayquestion}">
+<form method="post" id="answerform" action="#" th:action="@{/nextquestion}">
     <input type="submit" name="NEXT" value="NEXT"/>
 </form>
 <div class="datetime">
