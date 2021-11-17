@@ -7,7 +7,9 @@
     <script src="../static/scripts/common.js" th:src="@{/scripts/common.js}"></script>
 </head>
 <body>
-<h4>This is the results page.</h4>
+<h3>Here are your final results: </h3>
+<h4>Questions answered: <span th:text="${thequiz.getScoreKeeper().getTotalAnswered()}"></span></h4>
+<h4>Percent correct: <span th:text="${thequiz.getScoreKeeper().getPercentCorrect()}"></span></h4>
 <form id="questionform" action="#" method="post" th:action="@{/welcome}">
     <input type="submit" value="RETURN TO QUIZ SELECTION"/>
 </form>

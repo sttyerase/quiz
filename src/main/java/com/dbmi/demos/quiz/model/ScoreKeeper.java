@@ -38,7 +38,7 @@ public class ScoreKeeper
    
    public void setTotalQuestions(int tot){
       totalQuestions = tot;
-   }
+   } // SETTOTALQUESTIONS(INT)
 
    public void scoreQuiz(QuestionList qList){
       Question thisQ;
@@ -50,16 +50,16 @@ public class ScoreKeeper
          thisQ = myE.nextElement();
          if(thisQ.getAnswered())totalAnswered++;
          if(thisQ.getAnsweredCorrectly())totalCorrect++;
-      }
-   }
+      } // WHILE(MYE)
+   } // SCOREQUIZ(QUESTIONLIST)
 
-   public float getPercentCorrect(){
-      return((float)totalCorrect/(float)totalAnswered);
-   }
+   public double getPercentCorrect(){
+      return((double) totalCorrect/(double)totalAnswered) * 100;
+   } // GETPERCENTCORRECT()
    
    public void init(){
       this.setTotalAnswered(0);
       this.setTotalCorrect(0);
-   }
+   } // INIT()
 
 } // CLASS

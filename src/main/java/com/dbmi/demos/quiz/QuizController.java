@@ -80,13 +80,17 @@ public class QuizController {
         String returnResponse;  // THE RESPONSE RETURNED TO THE PAGE
         myLogger.trace("DISPLAYANSWER: requested.");
         Quiz theQuiz = (Quiz) request.getSession().getAttribute("thequiz");
+        QuestionList questionList = theQuiz.getQuestionList();
+        Question currentQuestion = questionList.getTheQuestions().elementAt(questionList.getCurrentQuestionNumber());
         int theResponse = Integer.parseInt(request.getParameter("questionchoices"));
-        int correctAnswer = theQuiz.getQuestionList().getTheQuestions().elementAt(theQuiz.getQuestionList().getCurrentQuestionNumber()).getCorrectAnswerNumber();
+        int correctAnswer = questionList.getTheQuestions().elementAt(theQuiz.getQuestionList().getCurrentQuestionNumber()).getCorrectAnswerNumber();
+        // UPDATE THE QUESTION INSTANCE WITH RESULTS -- SCOREKEEPER WILL SUMMARIZE RESULTS AT THE END
+        currentQuestion.setAnswered(true);
         if(theResponse == correctAnswer) {
             returnResponse = "You have chosen the correct answer.";
-            theQuiz.getScoreKeeper().setTotalCorrect(theQuiz.getScoreKeeper().getTotalCorrect() + 1); // INCREMENT CORRECT ANSWERS
+            currentQuestion.setAnsweredCorrectly(true);
         } else {
-            returnResponse = "You missed this one. :( ";
+            returnResponse = "You missed this one. \u1F641";
         } // IF-ELSE()
         aModel.addAttribute("correctness",returnResponse);
         aModel.addAttribute("thequiz",theQuiz);
@@ -108,6 +112,7 @@ public class QuizController {
     public String quizresults(Model aModel, HttpServletRequest request) {
         myLogger.trace("DISPLAYRESULTS: requested.");
         Quiz theQuiz = (Quiz) request.getSession().getAttribute("thequiz");
+        theQuiz.getScoreKeeper().scoreQuiz(theQuiz.getQuestionList());
         aModel.addAttribute("thequiz",theQuiz);
         aModel.addAttribute("today", new Date().toString());
         return "quizresults";
