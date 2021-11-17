@@ -46,6 +46,10 @@ table {
 	background-color: bisque;
 }
 
+#resultsheader {
+	text-align: center;
+}
+
 .boxed {
 	display: flex;
 	align-items: center;

@@ -37,7 +37,7 @@ public class QuizController {
     public String welcome(Model aModel, HttpServletRequest request) {
         myLogger.trace("Requested welcome page.");
         request.getSession().invalidate();
-        HttpSession mySession = request.getSession(true);
+        request.getSession(true);
         aModel.addAttribute("myQuizes", myQuizes);
         aModel.addAttribute("today", new Date().toString());
         return "welcome";
@@ -68,7 +68,6 @@ public class QuizController {
         QuestionList theQuestionList = theQuiz.getQuestionList();
         int currentQuestionNumber = theQuestionList.getCurrentQuestionNumber();
         theQuestionList.setCurrentQuestionNumber(currentQuestionNumber);
-        Question currentQuestion = theQuestionList.getTheQuestions().elementAt(currentQuestionNumber);
         // ADD COMPONENTS TO THE MODEL
         aModel.addAttribute("thequiz",theQuiz);
         aModel.addAttribute("today", new Date().toString());
@@ -87,10 +86,10 @@ public class QuizController {
         // UPDATE THE QUESTION INSTANCE WITH RESULTS -- SCOREKEEPER WILL SUMMARIZE RESULTS AT THE END
         currentQuestion.setAnswered(true);
         if(theResponse == correctAnswer) {
-            returnResponse = "You have chosen the correct answer.";
+            returnResponse = "You have chosen the correct answer. \uD83D\uDE0C";
             currentQuestion.setAnsweredCorrectly(true);
         } else {
-            returnResponse = "You missed this one. \u1F641";
+            returnResponse = "You missed this one. \uD83D\uDE41";
         } // IF-ELSE()
         aModel.addAttribute("correctness",returnResponse);
         aModel.addAttribute("thequiz",theQuiz);
