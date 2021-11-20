@@ -8,7 +8,7 @@ public class QuizParseHandler extends DefaultHandler {
    private final Quiz theQuiz;
    private Question question;
    private final QuestionList qList;
-   private String charactersTempString = "";
+   private StringBuilder charactersTempString = new StringBuilder();
    private int indx = 0;
 
    /** constructs a QuizParseHandler, passing the Quiz and QuestionList handles.*/
@@ -26,19 +26,16 @@ public class QuizParseHandler extends DefaultHandler {
          case "question":
             question = new Question();
             break;
-         case "questionText":
-            charactersTempString = "";
-            break;
          case "choiceList":
             setIndx(0);
             int va = Integer.parseInt(attrs.getValue("validAnswer"));
             question.setCorrectAnswerNumber(va);
-            charactersTempString = "";
+            charactersTempString = new StringBuilder();
             break;
+         case "questionText":
          case "choice":
-            break;
          case "explanation":
-            charactersTempString = "";
+            charactersTempString = new StringBuilder();
             break;
          case "quiz":
             theQuiz.setQuizName(attrs.getValue("name"));
@@ -50,7 +47,7 @@ public class QuizParseHandler extends DefaultHandler {
     * //@exception org.xml.sax.SAXException
     */
    public void characters(char[] ch, int start, int length){
-      charactersTempString = new String(ch,start,length).strip();
+      charactersTempString.append(ch,start,length);
    } // CHARACTERS()
 
    /** Implements logic executed when and end of element is detected.
@@ -63,17 +60,17 @@ public class QuizParseHandler extends DefaultHandler {
             qList.getTheQuestions().addElement(question);
             break;
          case "questionText":
-            question.setQuestionText(charactersTempString.replace('\n', ' '));
+            question.setQuestionText(charactersTempString.toString().strip());
             break;
          case "choiceList":
             question.trimChoiceToSize();
             break;
          case "choice":
             setIndx(getIndx() + 1);
-            question.addChoiceElement(charactersTempString.replace('\n', ' '));
+            question.addChoiceElement(charactersTempString.toString().strip());
             break;
          case "explanation":
-            question.setExplanation(charactersTempString.replace('\n', ' '));
+            question.setExplanation(charactersTempString.toString().strip());
             break;
          case "quiz":
             break;

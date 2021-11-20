@@ -14,7 +14,7 @@
     <h4>Question number: <span th:text="${thequiz.getQuestionList().getCurrentQuestionNumber() + 1}"/></h4>
     <form id="questionform" action="#" method="post" th:action="@{/displayanswer}" th:object="${thequiz.getQuestionList().getCurrentQuestionNumber()}">
         <div id="questiondisplay">
-            <h4 th:text="${thequiz.getQuestionList().getTheQuestions().elementAt(thequiz.getQuestionList().getCurrentQuestionNumber()).getQuestionText()}"></h4>
+            <h4>Question: <span th:text="${thequiz.getQuestionList().getTheQuestions().elementAt(thequiz.getQuestionList().getCurrentQuestionNumber()).getQuestionText()}">question text here</span></h4>
             <label for="questionchoices">Choose one correct answer</label>
             <input form="questionform" class="boxed" type="radio" name="questionchoices" id="questionchoices" style="display: list-item"
                                                         th:each="cla : ${thequiz.getQuestionList().getTheQuestions().elementAt(thequiz.getQuestionList().getCurrentQuestionNumber()).getChoiceListArray()}"
@@ -23,7 +23,6 @@
                 <input type="submit" value="SUBMIT ANSWER">
             </div>
         </div>
-        <input type="button" class="backbutton" value="go back" onclick="goBack()"/>
     </form>
 </div>
 <div class="datetime">
