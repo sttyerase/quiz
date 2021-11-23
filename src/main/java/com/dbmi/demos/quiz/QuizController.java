@@ -23,7 +23,6 @@ import javax.servlet.http.HttpSession;
 public class QuizController {
     private final Logger myLogger = LoggerFactory.getLogger(QuizController.class);
 
-    @Autowired
     private Vector<Quiz> myQuizes;
 
     // MAPPINGS
@@ -126,5 +125,10 @@ public class QuizController {
         aModel.addAttribute("today", new Date().toString());
         return "error";
     } // ERROR(MODEL,HTTPSERVLETREQUEST,HTTPSERVLETRESPONSE)
+
+    @Autowired
+    public void setMyQuizes(Vector<Quiz> myQuizes) {
+        this.myQuizes = myQuizes;
+    }
 
 } // CLASS
