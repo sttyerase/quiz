@@ -33,6 +33,6 @@ public class QuizParser {
         } catch (IOException ioe) {
             throw new QuizException("IO exception while creating parser: " + ioe);
         } // TRY-CATCH
-        myLogger.info("QUIZPARSER:   parsing complete:     " + theQuiz.getQuizName());
+        myLogger.debug("QUIZPARSER:   parsing complete:     " + theQuiz.getQuizName());
     } // PARSECONFIG(PROBE)
 } // CLASS

@@ -12,12 +12,16 @@ import javax.servlet.ServletContext;
 public class QuizInitializingBean implements InitializingBean {
     private final Logger myLogger = LoggerFactory.getLogger(QuizInitializingBean.class);
 
-    @Autowired
     ServletContext myServletContext;
 
     @Override
     public void afterPropertiesSet() {
-        myLogger.info("QUIZINITIALIZINGBEAN: " + this);
+        myLogger.info("QUIZINITIALIZINGBEAN: context name " + myServletContext.getServletContextName());
     } // AFTERPROPERTIESSET()
+
+    @Autowired
+    public void setMyServletContext(ServletContext myServletContext) {
+        this.myServletContext = myServletContext;
+    } // SETMYSERVLETCONTEXT(SERVLETCONTEXT)
 
 } // CLASS

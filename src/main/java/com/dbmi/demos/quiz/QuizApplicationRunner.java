@@ -29,7 +29,7 @@ public class QuizApplicationRunner implements ApplicationRunner {
     @Bean
     public ResourceBundleMessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasename("application");  // basename = name of file that contains the properties, eg., application.properties
+        messageSource.setBasename("application");  // basename = name of file that contains the properties, e.g., application.properties
         return messageSource;
     } // MESSAGESOURCE()
 
@@ -41,15 +41,15 @@ public class QuizApplicationRunner implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         // MANAGE LOGGING LEVEL SETTING TO ALLOW CHANGE FROM THE COMMAND LINE
-        myLogger.info("QUIZAPPLICATIONRUNNER: QuizController.log log level " + myLogger.getName());
-        myLogger.info("QUIZAPPLICATIONRUNNER: loading quiz list from path " + quizpath);
+        myLogger.debug("QUIZAPPLICATIONRUNNER: QuizController.log log level " + myLogger.getName());
+        myLogger.debug("QUIZAPPLICATIONRUNNER: loading quiz list from path " + quizpath);
         // LOOK FOR PATH TO QUIZ DOCUMENTS
         myLogger.debug("QUIZAPPLICATIONRUNNER: classpath: " + System.getProperty("java.class.path"));
         // CREATE FILE RESOURCE TO ACCESS QUIZ DOCUMENTS
         final Resource fileResource = myResourceLoader.getResource("classpath:" + quizpath);
-        myLogger.info("QUIZAPPLICATIONRUNNER: file name: " + fileResource.getFilename() + " existence = " + fileResource.exists());
+        myLogger.debug("QUIZAPPLICATIONRUNNER: file name: " + fileResource.getFilename() + " existence = " + fileResource.exists());
         File quizdir = fileResource.getFile();
-        myLogger.info("QUIZAPPLICATIONRUNNER: quiz directory location:    " + quizdir);
+        myLogger.debug("QUIZAPPLICATIONRUNNER: quiz directory location:    " + quizdir);
         String[] quizfiles = quizdir.list((d, s) -> s.toLowerCase().endsWith(".quiz"));
         if(quizfiles != null) {
             myLogger.info("QUIZAPPLICATIONRUNNER: number of quiz files to process: " + quizfiles.length);
