@@ -32,7 +32,7 @@ public class Quiz{
     *  objects from the document content.
     */
    public void createQuiz() throws QuizException {
-      myLogger.info("QUIZ document:         " + theDocument);
+      myLogger.debug("QUIZ document:         " + theDocument);
       QuizParser myParser = new QuizParser(this);
       try {
          myParser.parse(theDocument);

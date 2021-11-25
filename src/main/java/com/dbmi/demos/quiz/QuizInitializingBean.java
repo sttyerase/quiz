@@ -16,7 +16,7 @@ public class QuizInitializingBean implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() {
-        myLogger.info("QUIZINITIALIZINGBEAN: context name " + myServletContext.getServletContextName());
+        myLogger.info("QUIZINITIALIZINGBEAN: server info = " + myServletContext.getServerInfo());
     } // AFTERPROPERTIESSET()
 
     @Autowired
