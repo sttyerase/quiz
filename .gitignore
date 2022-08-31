@@ -7,3 +7,10 @@
 mvnw*
 .mvn/
 /target
+
+### KEYSTORE FILES
+*.jks
+*.key
+*.csr
+*.crt
+*.pem
