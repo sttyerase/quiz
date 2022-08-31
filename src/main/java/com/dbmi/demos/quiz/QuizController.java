@@ -5,6 +5,7 @@ import com.dbmi.demos.quiz.model.QuestionList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
-public class QuizController {
+public class QuizController implements ErrorController {
     private final Logger myLogger = LoggerFactory.getLogger(QuizController.class);
 
     private Vector<Quiz> myQuizes;
@@ -116,9 +117,9 @@ public class QuizController {
         return "quizresults";
     } // QUIZRESULTS(MODEL,HTTPSERVLETREQUEST,HTTPSERVLETRESPONSE)
 
-    @RequestMapping("/newerror")
+    @RequestMapping("/error")
     public String error(Model aModel, HttpServletRequest request, String errorMessage) {
-        myLogger.trace("NEWERROR: requested.");
+        myLogger.debug("ERROR PAGE requested.");
         Quiz theQuiz = (Quiz) request.getSession().getAttribute("thequiz");
         aModel.addAttribute("thequiz",theQuiz);
         aModel.addAttribute("err", errorMessage);
