@@ -36,7 +36,7 @@ public class QuizController implements ErrorController {
     @RequestMapping("/welcome")
     public String welcome(Model aModel, HttpServletRequest request) {
         myLogger.debug("Requested welcome page.");
-        request.getSession().invalidate();
+        // request.getSession().invalidate();
         request.getSession(true);
         aModel.addAttribute("myQuizes", myQuizes);
         aModel.addAttribute("today", new Date().toString());
