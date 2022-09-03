@@ -29,13 +29,13 @@ public class QuizController implements ErrorController {
     // MAPPINGS
     @RequestMapping("/")
     public String home(Model aModel, HttpServletRequest request) {
-        myLogger.trace("Requested root page.");
+        myLogger.debug("Requested root page.");
         return this.welcome(aModel, request);
     } // HOME
 
     @RequestMapping("/welcome")
     public String welcome(Model aModel, HttpServletRequest request) {
-        myLogger.trace("Requested welcome page.");
+        myLogger.debug("Requested welcome page.");
         request.getSession().invalidate();
         request.getSession(true);
         aModel.addAttribute("myQuizes", myQuizes);
@@ -46,7 +46,7 @@ public class QuizController implements ErrorController {
     @PostMapping("/initiatequiz")  // INITIATE THE QUIZ AND PASS THROUGH TO FIRST QUESTION /DISPLAYQUESTION
     public String initiatequiz(Model aModel, HttpServletRequest request) {
         // SESSION MANAGEMENT
-        myLogger.trace("INITIATEQUIZ: page requested.");
+        myLogger.debug("INITIATEQUIZ: page requested.");
         HttpSession mySession = request.getSession(false);
         if (mySession == null) {
             myLogger.error("INITIATEQUIZ: no session passed with request. Exiting now.");
@@ -62,7 +62,7 @@ public class QuizController implements ErrorController {
 
     @RequestMapping("/displayquestion")
     public String displayquestion(Model aModel, HttpServletRequest request) {
-        myLogger.trace("DISPLAYQUESTION: requested.");
+        myLogger.debug("DISPLAYQUESTION: requested.");
         Quiz theQuiz = (Quiz) request.getSession().getAttribute("thequiz");
         // IF THE QUIZ IS DONE, RETURN THE RESULTS
         QuestionList theQuestionList = theQuiz.getQuestionList();
@@ -77,7 +77,7 @@ public class QuizController implements ErrorController {
     @PostMapping("/displayanswer")
     public String theanswer(Model aModel, HttpServletRequest request) {
         String returnResponse;  // THE RESPONSE RETURNED TO THE PAGE
-        myLogger.trace("DISPLAYANSWER: requested.");
+        myLogger.debug("DISPLAYANSWER: requested.");
         Quiz theQuiz = (Quiz) request.getSession().getAttribute("thequiz");
         QuestionList questionList = theQuiz.getQuestionList();
         Question currentQuestion = questionList.getTheQuestions().elementAt(questionList.getCurrentQuestionNumber());
@@ -109,7 +109,7 @@ public class QuizController implements ErrorController {
 
     @RequestMapping("/displayresults")
     public String quizresults(Model aModel, HttpServletRequest request) {
-        myLogger.trace("DISPLAYRESULTS: requested.");
+        myLogger.debug("DISPLAYRESULTS: requested.");
         Quiz theQuiz = (Quiz) request.getSession().getAttribute("thequiz");
         theQuiz.getScoreKeeper().scoreQuiz(theQuiz.getQuestionList());
         aModel.addAttribute("thequiz",theQuiz);
