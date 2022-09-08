@@ -120,8 +120,6 @@ public class QuizController implements ErrorController {
     @RequestMapping("/error")
     public String error(Model aModel, HttpServletRequest request, String errorMessage) {
         myLogger.debug("ERROR PAGE requested.");
-        Quiz theQuiz = (Quiz) request.getSession().getAttribute("thequiz");
-        aModel.addAttribute("thequiz",theQuiz);
         aModel.addAttribute("err", errorMessage);
         aModel.addAttribute("today", new Date().toString());
         return "error";
