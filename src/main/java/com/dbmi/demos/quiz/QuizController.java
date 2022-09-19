@@ -81,7 +81,7 @@ public class QuizController implements ErrorController {
         Quiz theQuiz = (Quiz) request.getSession().getAttribute("thequiz");
         QuestionList questionList = theQuiz.getQuestionList();
         Question currentQuestion = questionList.getTheQuestions().elementAt(questionList.getCurrentQuestionNumber());
-        int theResponse = Integer.parseInt(request.getParameter("questionchoices"));
+        int theResponse = Integer.parseInt(request.getParameter("chosenanswer"));
         int correctAnswer = questionList.getTheQuestions().elementAt(theQuiz.getQuestionList().getCurrentQuestionNumber()).getCorrectAnswerNumber();
         // UPDATE THE QUESTION INSTANCE WITH RESULTS -- SCOREKEEPER WILL SUMMARIZE RESULTS AT THE END
         currentQuestion.setAnswered(true);
