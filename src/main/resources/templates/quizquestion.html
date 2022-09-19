@@ -15,8 +15,8 @@
     <form id="questionform" action="#" method="post" th:action="@{/displayanswer}" th:object="${thequiz.getQuestionList().getCurrentQuestionNumber()}">
         <div id="questiondisplay">
             <h4>Question: <span th:text="${thequiz.getQuestionList().getTheQuestions().elementAt(thequiz.getQuestionList().getCurrentQuestionNumber()).getQuestionText()}">question text here</span></h4>
-            <label for="questionchoices">Choose one correct answer</label>
-            <input form="questionform" class="boxed" type="radio" name="questionchoices" id="questionchoices" style="display: list-item"
+            <p for="questionchoices">Choose one correct answer:</p>
+            <input form="questionform" class="boxed" type="radio" name="questionchoices" id="questionchoices" style="display: inline-block"
                                                         th:each="cla : ${thequiz.getQuestionList().getTheQuestions().elementAt(thequiz.getQuestionList().getCurrentQuestionNumber()).getChoiceListArray()}"
                                                         th:value="${claStat.index} + 1" th:text="${cla}"/>
             <div class="submit">
@@ -38,3 +38,5 @@
 </div>
 </body>
 </html>
+
+<!-- LEAVING OUT NAME= IN QUESTIONCHOICE INPUT TAG RESULTS IN NUMBERFORMATEXCEPTION -->
