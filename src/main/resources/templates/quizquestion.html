@@ -10,8 +10,7 @@
 <body>
 <div class="questiondiv">
     <h3>Quiz Title: <span th:text="${thequiz.getQuizName()}"></span></h3>
-    <h4>Total questions: <span th:text="${thequiz.getQuestionList().getNumberOfQuestions()}"/></h4>
-    <h4>Question number: <span th:text="${thequiz.getQuestionList().getCurrentQuestionNumber() + 1}"/></h4>
+    <h4>Question number: <span th:text="${thequiz.getQuestionList().getCurrentQuestionNumber() + 1}"/> / <span th:text="${thequiz.getQuestionList().getNumberOfQuestions()}"/></h4>
     <form id="questionform" action="#" method="post" th:action="@{/displayanswer}" th:object="${thequiz.getQuestionList().getCurrentQuestionNumber()}">
         <div id="questiondisplay">
             <h4>Question: <span th:text="${thequiz.getQuestionList().getTheQuestions().elementAt(thequiz.getQuestionList().getCurrentQuestionNumber()).getQuestionText()}">question text here</span></h4>
