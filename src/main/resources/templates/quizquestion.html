@@ -14,10 +14,12 @@
     <form id="questionform" action="#" method="post" th:action="@{/displayanswer}" th:object="${thequiz.getQuestionList().getCurrentQuestionNumber()}">
         <div id="questiondisplay">
             <h4>Question: <span th:text="${thequiz.getQuestionList().getTheQuestions().elementAt(thequiz.getQuestionList().getCurrentQuestionNumber()).getQuestionText()}">question text here</span></h4>
-            <p for="questionchoices">Choose one correct answer:</p>
-            <input form="questionform" class="boxed" type="radio" name="questionchoices" id="questionchoices" style="display: inline-block"
-                                                        th:each="cla : ${thequiz.getQuestionList().getTheQuestions().elementAt(thequiz.getQuestionList().getCurrentQuestionNumber()).getChoiceListArray()}"
-                                                        th:value="${claStat.index} + 1" th:text="${cla}"/>
+            <p>Choose one correct answer:</p>
+            <ul style="list-style-type: none">
+                <li th:each="cla : ${thequiz.getQuestionList().getTheQuestions().elementAt(thequiz.getQuestionList().getCurrentQuestionNumber()).getChoiceListArray()}">
+                    <input type="radio" name="chosenanswer" th:value="${claStat.index} + 1 "/><label th:text="${cla}"/>  <!-- NAME MAPS TO REQUEST PARAMETER IN CONTROLLER -->
+                </li>
+            </ul>
             <div class="submit">
                 <input type="submit" value="SUBMIT ANSWER">
             </div>
@@ -37,5 +39,3 @@
 </div>
 </body>
 </html>
-
-<!-- LEAVING OUT NAME= IN QUESTIONCHOICE INPUT TAG RESULTS IN NUMBERFORMATEXCEPTION -->
