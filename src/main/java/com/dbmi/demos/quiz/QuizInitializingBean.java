@@ -1,3 +1,4 @@
+
 package com.dbmi.demos.quiz;
 
 import org.slf4j.Logger;
@@ -6,7 +7,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletContext;
 
 @Component
 public class QuizInitializingBean implements InitializingBean {

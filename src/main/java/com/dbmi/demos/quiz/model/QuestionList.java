@@ -7,11 +7,11 @@ import java.util.*;
  */
 public class QuestionList {
    private int currentQuestionNumber = 0;
-   private Vector<Question> theQuestions;
+   private final LinkedList<Question> theQuestions;
 
-   public QuestionList(int num){
+   public QuestionList(){
       super();
-      theQuestions = new Vector<>(num);
+      theQuestions = new LinkedList<>();
    } // CONSTRUCTOR(NUM)
 
    public int getCurrentQuestionNumber(){
@@ -22,13 +22,9 @@ public class QuestionList {
       this.currentQuestionNumber = number;
    } // SETCURRENTQUESTIONNUMBER(INT)
 
-   public Vector<Question> getTheQuestions() {
+   public LinkedList<Question> getTheQuestions() {
       return theQuestions;
    } // GETTHEQUESTIONLIST()
-
-   public void setTheQuestions(Vector<Question> theQuestions) {
-      this.theQuestions = theQuestions;
-   } // SETTHEQUESTIONS(VECTOR)
 
    public boolean notDone(){
       return this.currentQuestionNumber < theQuestions.size();
@@ -36,9 +32,9 @@ public class QuestionList {
    
    public void initQuestionList(){
       Question aQ;
-      Enumeration<Question> e = theQuestions.elements();
-      while(e.hasMoreElements()){
-         aQ = e.nextElement();
+      Iterator<Question> myIt = theQuestions.iterator();
+      while(myIt.hasNext()) {
+         aQ = myIt.next();
          aQ.setAnswered(false);
          aQ.setAnsweredCorrectly(false);
       } // WHILE

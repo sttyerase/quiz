@@ -17,8 +17,8 @@ import org.springframework.ui.Model;
 
 import com.dbmi.demos.quiz.model.Quiz;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class QuizController implements ErrorController {
@@ -50,7 +50,7 @@ public class QuizController implements ErrorController {
         HttpSession mySession = request.getSession(false);
         if (mySession == null) {
             myLogger.error("INITIATEQUIZ: no session passed with request. Exiting now.");
-            return this.error(aModel,request,"INITIATEQUIZ: no session passed with request. Exiting now.");
+            return this.error(aModel,"INITIATEQUIZ: no session passed with request. Exiting now.");
         } // IF(MYSESSION)
         int quiznum = Integer.parseInt(request.getParameter("welcomeselect"));
         Quiz theQuiz = myQuizes.elementAt(quiznum);
@@ -80,9 +80,9 @@ public class QuizController implements ErrorController {
         myLogger.debug("DISPLAYANSWER: requested.");
         Quiz theQuiz = (Quiz) request.getSession().getAttribute("thequiz");
         QuestionList questionList = theQuiz.getQuestionList();
-        Question currentQuestion = questionList.getTheQuestions().elementAt(questionList.getCurrentQuestionNumber());
+        Question currentQuestion = questionList.getTheQuestions().get(questionList.getCurrentQuestionNumber());
         int theResponse = Integer.parseInt(request.getParameter("chosenanswer"));
-        int correctAnswer = questionList.getTheQuestions().elementAt(theQuiz.getQuestionList().getCurrentQuestionNumber()).getCorrectAnswerNumber();
+        int correctAnswer = questionList.getTheQuestions().get(theQuiz.getQuestionList().getCurrentQuestionNumber()).getCorrectAnswerNumber();
         // UPDATE THE QUESTION INSTANCE WITH RESULTS -- SCOREKEEPER WILL SUMMARIZE RESULTS AT THE END
         currentQuestion.setAnswered(true);
         if(theResponse == correctAnswer) {
@@ -118,7 +118,7 @@ public class QuizController implements ErrorController {
     } // QUIZRESULTS(MODEL,HTTPSERVLETREQUEST,HTTPSERVLETRESPONSE)
 
     @RequestMapping("/error")
-    public String error(Model aModel, HttpServletRequest request, String errorMessage) {
+    public String error(Model aModel, String errorMessage) {
         myLogger.debug("ERROR PAGE requested.");
         aModel.addAttribute("err", errorMessage);
         aModel.addAttribute("today", new Date().toString());

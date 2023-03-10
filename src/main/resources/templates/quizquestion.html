@@ -11,12 +11,12 @@
 <div class="questiondiv">
     <h3>Quiz Title: <span th:text="${thequiz.getQuizName()}"></span></h3>
     <h4>Question number: <span th:text="${thequiz.getQuestionList().getCurrentQuestionNumber() + 1}"/> / <span th:text="${thequiz.getQuestionList().getNumberOfQuestions()}"/></h4>
-    <form id="questionform" action="#" method="post" th:action="@{/displayanswer}" th:object="${thequiz.getQuestionList().getCurrentQuestionNumber()}">
+    <form id="questionform" action="#" method="post" th:action="@{/displayanswer}" th:object="${thequiz}">
         <div id="questiondisplay">
-            <h4>Question: <span th:text="${thequiz.getQuestionList().getTheQuestions().elementAt(thequiz.getQuestionList().getCurrentQuestionNumber()).getQuestionText()}">question text here</span></h4>
+            <h4>Question: <span th:text="${thequiz.getQuestionList().getTheQuestions().get(thequiz.getQuestionList().getCurrentQuestionNumber()).getQuestionText()}">question text here</span></h4>
             <p>Choose one correct answer:</p>
             <ul style="list-style-type: none">
-                <li th:each="cla : ${thequiz.getQuestionList().getTheQuestions().elementAt(thequiz.getQuestionList().getCurrentQuestionNumber()).getChoiceListArray()}">
+                <li th:each="cla : ${thequiz.getQuestionList().getTheQuestions().get(thequiz.getQuestionList().getCurrentQuestionNumber()).getChoiceListArray()}">
                     <input type="radio" name="chosenanswer" th:value="${claStat.index} + 1 "/><label th:text="${cla}"/>  <!-- NAME MAPS TO REQUEST PARAMETER IN CONTROLLER -->
                 </li>
             </ul>

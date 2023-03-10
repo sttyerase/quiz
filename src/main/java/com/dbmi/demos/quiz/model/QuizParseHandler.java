@@ -57,7 +57,7 @@ public class QuizParseHandler extends DefaultHandler {
    public void endElement(String uri,String localName,String qName){
       switch (localName){
          case "question":
-            qList.getTheQuestions().addElement(question);
+            qList.getTheQuestions().add(question);
             break;
          case "questionText":
             question.setQuestionText(charactersTempString.toString().strip());
@@ -85,7 +85,6 @@ public class QuizParseHandler extends DefaultHandler {
     * //@exception org.xml.sax.SAXException
     */
    public void endDocument(){
-      qList.getTheQuestions().trimToSize();
    } // ENDDOCUMENT()
 
    public int getIndx() {

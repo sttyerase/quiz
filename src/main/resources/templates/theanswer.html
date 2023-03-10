@@ -9,7 +9,7 @@
 <body>
 <h4 th:text="${correctness}">You are correct, sir!!</h4>
 <div>
-    <h4 th:text="${thequiz.getQuestionList().getTheQuestions().elementAt(thequiz.getQuestionList().getCurrentQuestionNumber()).getExplanation()}">explanation</h4>
+    <h4 th:text="${thequiz.getQuestionList().getTheQuestions().get(thequiz.getQuestionList().getCurrentQuestionNumber()).getExplanation()}">explanation</h4>
 </div>
 <form method="post" id="answerform" action="#" th:action="@{/nextquestion}">
     <input type="submit" name="NEXT" value="NEXT"/>

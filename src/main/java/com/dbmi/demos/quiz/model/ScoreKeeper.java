@@ -45,9 +45,9 @@ public class ScoreKeeper
       totalAnswered = 0;
       totalCorrect = 0;
       totalQuestions = qList.getTheQuestions().size();
-      java.util.Enumeration<Question> myE = qList.getTheQuestions().elements();
-      while(myE.hasMoreElements()){
-         thisQ = myE.nextElement();
+      java.util.Iterator<Question> myE = qList.getTheQuestions().iterator();
+      while(myE.hasNext()){
+         thisQ = myE.next();
          if(thisQ.getAnswered())totalAnswered++;
          if(thisQ.getAnsweredCorrectly())totalCorrect++;
       } // WHILE(MYE)

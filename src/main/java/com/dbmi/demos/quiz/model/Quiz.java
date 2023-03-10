@@ -19,7 +19,7 @@ public class Quiz{
     * @param aQuizDoc XML document that conforms to the Quiz schema (Quiz.xsd)
     */
    public Quiz(String aQuizDoc) throws QuizException {
-      theQuestionList = new QuestionList(200);
+      theQuestionList = new QuestionList();
       this.theDocument = aQuizDoc;
       try {
          this.createQuiz();
